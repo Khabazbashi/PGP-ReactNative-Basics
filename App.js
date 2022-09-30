@@ -46,7 +46,7 @@ export default function App() {
         </Row>
         <Row>
           <Button title="0" onPress={() => HandleTap("number", 0)}></Button>
-          <Button title="," onPress={() => HandleTap("separator", ".")}></Button>
+          <Button title="," onPress={() => HandleTap("comma", ".")}></Button>
           <Button title="=" onPress={() => HandleTap("operator", "=")}></Button>
         </Row>
       </SafeAreaView>

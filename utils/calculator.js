@@ -66,7 +66,7 @@ function handleOperator(value, state) {
     return {
         ...state,
         currentValue: result,
-        previousValue: result, 
+        previousValue: result,
         startFresh: true,
         operator: value,
     };
@@ -82,6 +82,18 @@ function calculator(type, value, state) {
 
         case "clear":
                 return initialState
+
+        case "invert":
+            return {
+                ...state,
+                currentValue: state.currentValue * -1,
+            }
+        
+        case "comma":
+            return {
+                ...state,
+                currentValue: `${state.currentValue + value}`
+            }
         
         default:
             console.log("def")
