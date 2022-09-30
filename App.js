@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { StatusBar } from 'expo-status-bar';
 import { Button, SafeAreaView, StyleSheet, Text, View } from 'react-native';
 import Row from './components/Row';
+import calculator, { initialState } from './utils/calculator';
 
 
 export default function App() {
@@ -17,7 +18,7 @@ export default function App() {
       <StatusBar style="auto" />
       <SafeAreaView>
         <Text style={styles.value}>
-          Current value
+          {parseFloat(state.currentValue).toLocaleString()}
         </Text>
         <Row>
           <Button title="C" onPress={() => HandleTap("clear")}></Button>
