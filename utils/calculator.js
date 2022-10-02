@@ -85,6 +85,11 @@ function calculator(type, value, state) {
                 ...state,
                 currentValue: `${state.currentValue + value}`
             }
+        case "percentage":
+                return {
+                    ...state,
+                    currentValue: `${state.currentValue/100}`
+                }
         default:
             return state;
     }

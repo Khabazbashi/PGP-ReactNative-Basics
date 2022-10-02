@@ -27,7 +27,7 @@ export default function App() {
         <Row>
           <Button title="AC" onPress={() => HandleTap("clear")} theme="accent"></Button>
           <Button title="+/-" onPress={() => HandleTap("invert")} theme="accent"></Button>
-          <Button title="%" onPress={() => HandleTap("operator", "/")} theme="accent"></Button>
+          <Button title="%" onPress={() => HandleTap("percentage")} theme="accent"></Button>
           <Button title="÷" onPress={() => HandleTap("operator", "/")} theme="accent"></Button>
         </Row>
         <Row>
