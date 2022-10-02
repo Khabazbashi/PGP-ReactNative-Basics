@@ -7,14 +7,13 @@ export const initialState = {
 
 function handleNumber(value, state) {
     if (state.startFresh) {
-        console.log("2")
         return {
             ...state,
             currentValue: value,
             startFresh: false
         };
     }
-    console.log("1")
+
     return {
         ...state,
         currentValue: `${state.currentValue}${value}`
@@ -22,9 +21,7 @@ function handleNumber(value, state) {
 }
 
 function handleOperator(value, state) {
-
     if (state.previousValue === null) {
-        console.log("3")
         return {
             ...state,
             previousValue: state.currentValue,
@@ -51,10 +48,7 @@ function handleOperator(value, state) {
             break;
      }
 
-
     if (value === "=") {
-        console.log("4")
-        console.log(state)
         return {
             ...initialState,
             currentValue: result,
@@ -62,9 +56,7 @@ function handleOperator(value, state) {
         }
     }
 
-    console.log("5")
     return {
-        ...state,
         currentValue: result,
         previousValue: result,
         startFresh: true,
@@ -81,22 +73,19 @@ function calculator(type, value, state) {
             return handleOperator(value, state)
 
         case "clear":
-                return initialState
+            return initialState
 
         case "invert":
             return {
                 ...state,
                 currentValue: state.currentValue * -1,
             }
-        
         case "comma":
             return {
                 ...state,
                 currentValue: `${state.currentValue + value}`
             }
-        
         default:
-            console.log("def")
             return state;
     }
 };
