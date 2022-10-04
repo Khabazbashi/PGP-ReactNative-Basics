@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { StatusBar } from 'expo-status-bar';
-import { SafeAreaView, StyleSheet, Text, View } from 'react-native';
+import { Dimensions, SafeAreaView, StyleSheet, Text, View } from 'react-native';
 import Row from './components/Row';
 import Button from './components/Button';
 import calculator, { initialState } from './utils/calculator';
@@ -9,24 +9,41 @@ import calculator, { initialState } from './utils/calculator';
 export default function App() {
 
   const [state, setState] = useState(initialState)
+  const windowText = [styles.windowText];
 
   const HandleTap = (type, value) => {
     setState(calculator(type, value, state));
   };
 
+  const displayResult = (currentValue) => {
+    if(currentValue.length > 7)
+    {
+      windowText.push(styles.windowTextReduced)
+    }
+    if(currentValue.length > 10)
+    {
+      return parseFloat(currentValue/(10**(currentValue.length-1))).toLocaleString() + 
+      "e" + (currentValue.length-1) 
+    }
+   return parseFloat(currentValue).toLocaleString() 
+  };
+  
+  //TODO division by 0
+  //TODO pressing equals multiple times
+
   return (
     <View style={styles.container}>
       <StatusBar style="auto" />
       <SafeAreaView>
-        <View  style={styles.window}>
-        <Text style={styles.windowText}>
-          {parseFloat(state.currentValue).toLocaleString()}
+        <View style={styles.window}>
+        <Text style={windowText}>
+          { displayResult(state.currentValue) }
         </Text>
         </View>
         <View style={styles.buttonContainer}>
         <Row>
-          <Button title="AC" onPress={() => HandleTap("clear")} theme="accent"></Button>
-          <Button title="+/-" onPress={() => HandleTap("invert")} theme="accent"></Button>
+          <Button title="C" onPress={() => HandleTap("clear")} theme="accent"></Button>
+          <Button title="±" onPress={() => HandleTap("invert")} theme="accent"></Button>
           <Button title="%" onPress={() => HandleTap("percentage")} theme="accent"></Button>
           <Button title="÷" onPress={() => HandleTap("operator", "/")} theme="accent"></Button>
         </Row>
@@ -49,9 +66,9 @@ export default function App() {
           <Button title="+" onPress={() => HandleTap("operator", "+")} theme="accent"></Button>
         </Row>
         <Row>
-          <Button title="0" onPress={() => HandleTap("number", 0)} ></Button>
-          <Button title="," onPress={() => HandleTap("comma", ".")} size="double" ></Button>
-          <Button title="=" onPress={() => HandleTap("operator", "=")} theme="accent"></Button>
+          <Button title="0" onPress={() => HandleTap("number", 0)} size="double"></Button>
+          <Button title="," onPress={() => HandleTap("comma", ".")}  ></Button>
+          <Button title="=" onPress={() => HandleTap("operator", "=")} theme="equal" ></Button>
         </Row>
         </View>
       </SafeAreaView>
@@ -60,31 +77,34 @@ export default function App() {
   );
 }
 
+
+
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: "center",
     alignItems: "center",
-    backgroundColor: '#2f4056',
-    paddingLeft: 10,
-    paddingRight: 10,
+    justifyContent: "center",
+    backgroundColor: '#17181a',
   },
   window: {
-    backgroundColor: '#2f4056',
-    paddingTop: 15,
-    paddingBottom: 15,
-    marginLeft: 10,
-    marginRight: 10,
-    marginBottom: 40,
+    flex: 1,
+    width: Dimensions.get("window").width * 0.87,
+    justifyContent: "flex-end",
+    paddingHorizontal: 20,
+    marginTop: 100,
   },
   windowText: {
-    color: "#8ac8da",
-    fontSize: 42,
+    color: "#f7f8fa",
+    fontSize: 80,
     textAlign: "right",
-    paddingRight: 25,
+  },
+  windowTextReduced:{
+    fontSize: 50,
   },
   buttonContainer: {
+    flex: 3,
     justifyContent: "center",
     fontSize: 30,
+    marginVertical: 20,
   }
 });
