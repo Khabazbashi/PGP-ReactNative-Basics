@@ -14,6 +14,13 @@ function handleNumber(value, state) {
         };
     }
 
+    if(state.currentValue.length >= 10)
+    {
+        return {
+            ...state,
+        };
+    }
+
     return {
         ...state,
         currentValue: `${state.currentValue}${value}`
