@@ -11,6 +11,10 @@ const Button = ({ onPress, title, theme, size }) => {
         buttonStyles.push(styles.accentButton)
         textStyles.push(styles.accentText)
     }
+    if(theme === "equal"){
+        buttonStyles.push(styles.equalButton)
+        textStyles.push(styles.accentText)
+    }
     if(size === "double"){
         buttonStyles.push(styles.doubleButton)
     }
@@ -26,29 +30,31 @@ const buttonWidth = screen.width / 6;
 
 const styles = StyleSheet.create({
     button: {
-        backgroundColor: "#2f4056",
+        backgroundColor: "#232428",
         width: buttonWidth,
         height: buttonWidth,
         alignItems: "center",
         justifyContent: "center",
         margin: 10,
-        borderRadius: 150,
+        borderRadius: 25,
     },
     doubleButton: {
         width: buttonWidth * 2.3,
-        paddingRight: 75,
+        alignSelf: "center",
     },
     text: {
-        color: "#8ac8da",
+        color: "#f7f8fa",
         fontSize: 25,
         fontFamily: "Menlo"
     },
     accentButton:{
-        backgroundColor: "#8ac8da",
-        opacity: 0.5,
+        backgroundColor: "#ff9501",
+    },
+    equalButton:{
+        backgroundColor: "#2dca73",
     },
     accentText:{
-        color: "#2f4056",
+        color: "#f7f8fa",
     }
 
 
